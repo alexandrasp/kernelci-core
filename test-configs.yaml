@@ -1006,6 +1006,25 @@ device_types:
       - passlist: {defconfig: ['defconfig']}
       - blocklist: {kernel: ['v3.']}
 
+  qemu_arm-cubieboard:
+    base_name: qemu
+    mach: qemu
+    arch: arm
+    boot_method: qemu
+    context:
+      arch: 'arm'
+      cpu: 'cortex-a8'
+      machine: 'cubieboard'
+      guestfs_interface: 'none'
+      memory: 512
+      model: 'model=allwinner-emac'
+    extra_options: ['-device ide-hd,drive=lavatest']
+    params:
+      console_dev: 'ttyS0'
+    dtb: 'sun4i-a10-cubieboard.dtb'
+    filters:
+      - passlist: {defconfig: ['multi_v7_defconfig']}
+
   qemu_arm-versatilepb:
     base_name: qemu
     mach: qemu
@@ -2003,6 +2022,10 @@ test_configs:
   - device_type: qcom-qdf2400
     test_plans:
       - baseline
+
+  - device_type: qemu_arm-cubieboard
+    test_plans:
+      - baseline_qemu
 
   - device_type: qemu_arm-versatilepb
     test_plans:
